@@ -16,6 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let albumViewController = AlbumViewController(style: .grouped)
+        let navController = UINavigationController(rootViewController: albumViewController)
+        window?.rootViewController = navController
+        window?.makeKeyAndVisible()
         return true
     }
 

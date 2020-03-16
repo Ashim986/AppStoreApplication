@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		C5C2918724200A50003F8790 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C2918624200A50003F8790 /* AppDelegate.swift */; };
-		C5C2918924200A50003F8790 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C2918824200A50003F8790 /* ViewController.swift */; };
+		C5C2918924200A50003F8790 /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C2918824200A50003F8790 /* AlbumViewController.swift */; };
 		C5C2918C24200A50003F8790 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5C2918A24200A50003F8790 /* Main.storyboard */; };
 		C5C2918E24200A51003F8790 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5C2918D24200A51003F8790 /* Assets.xcassets */; };
 		C5C2919124200A51003F8790 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5C2918F24200A51003F8790 /* LaunchScreen.storyboard */; };
 		C5C2919C24200A51003F8790 /* AppStoreApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C2919B24200A51003F8790 /* AppStoreApplicationTests.swift */; };
+		C5C291AB24201342003F8790 /* AlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C291AA24201342003F8790 /* AlbumViewModel.swift */; };
+		C5C291AF242015CD003F8790 /* AlbumViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C291AE242015CD003F8790 /* AlbumViewCell.swift */; };
+		C5C291B324201603003F8790 /* AlbumCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C291B224201603003F8790 /* AlbumCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,7 +31,7 @@
 /* Begin PBXFileReference section */
 		C5C2918324200A50003F8790 /* AppStoreApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStoreApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5C2918624200A50003F8790 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C5C2918824200A50003F8790 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C5C2918824200A50003F8790 /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 		C5C2918B24200A50003F8790 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C5C2918D24200A51003F8790 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C5C2919024200A51003F8790 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +39,9 @@
 		C5C2919724200A51003F8790 /* AppStoreApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppStoreApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5C2919B24200A51003F8790 /* AppStoreApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreApplicationTests.swift; sourceTree = "<group>"; };
 		C5C2919D24200A51003F8790 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C5C291AA24201342003F8790 /* AlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModel.swift; sourceTree = "<group>"; };
+		C5C291AE242015CD003F8790 /* AlbumViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewCell.swift; sourceTree = "<group>"; };
+		C5C291B224201603003F8790 /* AlbumCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +84,10 @@
 			isa = PBXGroup;
 			children = (
 				C5C2918624200A50003F8790 /* AppDelegate.swift */,
-				C5C2918824200A50003F8790 /* ViewController.swift */,
+				C5C291A924200DC8003F8790 /* Extensions */,
+				C5C291A824200DB5003F8790 /* Service + networking */,
+				C5C291A724200DAB003F8790 /* Bindable */,
+				C5C291A624200D90003F8790 /* Album View Controller */,
 				C5C2918A24200A50003F8790 /* Main.storyboard */,
 				C5C2918D24200A51003F8790 /* Assets.xcassets */,
 				C5C2918F24200A51003F8790 /* LaunchScreen.storyboard */,
@@ -94,6 +103,38 @@
 				C5C2919D24200A51003F8790 /* Info.plist */,
 			);
 			path = AppStoreApplicationTests;
+			sourceTree = "<group>";
+		};
+		C5C291A624200D90003F8790 /* Album View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C5C2918824200A50003F8790 /* AlbumViewController.swift */,
+				C5C291AA24201342003F8790 /* AlbumViewModel.swift */,
+				C5C291AE242015CD003F8790 /* AlbumViewCell.swift */,
+				C5C291B224201603003F8790 /* AlbumCellViewModel.swift */,
+			);
+			path = "Album View Controller";
+			sourceTree = "<group>";
+		};
+		C5C291A724200DAB003F8790 /* Bindable */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Bindable;
+			sourceTree = "<group>";
+		};
+		C5C291A824200DB5003F8790 /* Service + networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Service + networking";
+			sourceTree = "<group>";
+		};
+		C5C291A924200DC8003F8790 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,7 +238,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C5C2918924200A50003F8790 /* ViewController.swift in Sources */,
+				C5C291AB24201342003F8790 /* AlbumViewModel.swift in Sources */,
+				C5C2918924200A50003F8790 /* AlbumViewController.swift in Sources */,
+				C5C291AF242015CD003F8790 /* AlbumViewCell.swift in Sources */,
+				C5C291B324201603003F8790 /* AlbumCellViewModel.swift in Sources */,
 				C5C2918724200A50003F8790 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,7 +335,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -346,7 +390,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
