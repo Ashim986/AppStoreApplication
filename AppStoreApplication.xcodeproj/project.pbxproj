@@ -16,6 +16,12 @@
 		C5C291AB24201342003F8790 /* AlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C291AA24201342003F8790 /* AlbumViewModel.swift */; };
 		C5C291AF242015CD003F8790 /* AlbumViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C291AE242015CD003F8790 /* AlbumViewCell.swift */; };
 		C5C291B324201603003F8790 /* AlbumCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C291B224201603003F8790 /* AlbumCellViewModel.swift */; };
+		C5CA953624203707000A4F9A /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA953524203707000A4F9A /* Bindable.swift */; };
+		C5CA953824203713000A4F9A /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA953724203713000A4F9A /* WebService.swift */; };
+		C5CA953A24203B1A000A4F9A /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA953924203B1A000A4F9A /* Album.swift */; };
+		C5CA953C24203F32000A4F9A /* AlbumJsonData.json in Resources */ = {isa = PBXBuildFile; fileRef = C5CA953B24203F32000A4F9A /* AlbumJsonData.json */; };
+		C5CA9541242043FC000A4F9A /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA9540242043FC000A4F9A /* Genre.swift */; };
+		C5CA9543242060A0000A4F9A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA9542242060A0000A4F9A /* Response.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +48,12 @@
 		C5C291AA24201342003F8790 /* AlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModel.swift; sourceTree = "<group>"; };
 		C5C291AE242015CD003F8790 /* AlbumViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewCell.swift; sourceTree = "<group>"; };
 		C5C291B224201603003F8790 /* AlbumCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCellViewModel.swift; sourceTree = "<group>"; };
+		C5CA953524203707000A4F9A /* Bindable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bindable.swift; path = "AppStoreApplication/Album View Controller/Bindable.swift"; sourceTree = SOURCE_ROOT; };
+		C5CA953724203713000A4F9A /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebService.swift; path = "AppStoreApplication/Album View Controller/WebService.swift"; sourceTree = SOURCE_ROOT; };
+		C5CA953924203B1A000A4F9A /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		C5CA953B24203F32000A4F9A /* AlbumJsonData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AlbumJsonData.json; sourceTree = "<group>"; };
+		C5CA9540242043FC000A4F9A /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		C5CA9542242060A0000A4F9A /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				C5C2918624200A50003F8790 /* AppDelegate.swift */,
+				C5CA953F2420427C000A4F9A /* Data */,
 				C5C291A924200DC8003F8790 /* Extensions */,
 				C5C291A824200DB5003F8790 /* Service + networking */,
 				C5C291A724200DAB003F8790 /* Bindable */,
@@ -101,6 +114,7 @@
 			children = (
 				C5C2919B24200A51003F8790 /* AppStoreApplicationTests.swift */,
 				C5C2919D24200A51003F8790 /* Info.plist */,
+				C5CA953B24203F32000A4F9A /* AlbumJsonData.json */,
 			);
 			path = AppStoreApplicationTests;
 			sourceTree = "<group>";
@@ -119,6 +133,7 @@
 		C5C291A724200DAB003F8790 /* Bindable */ = {
 			isa = PBXGroup;
 			children = (
+				C5CA953524203707000A4F9A /* Bindable.swift */,
 			);
 			path = Bindable;
 			sourceTree = "<group>";
@@ -126,6 +141,7 @@
 		C5C291A824200DB5003F8790 /* Service + networking */ = {
 			isa = PBXGroup;
 			children = (
+				C5CA953724203713000A4F9A /* WebService.swift */,
 			);
 			path = "Service + networking";
 			sourceTree = "<group>";
@@ -135,6 +151,16 @@
 			children = (
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C5CA953F2420427C000A4F9A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C5CA953924203B1A000A4F9A /* Album.swift */,
+				C5CA9540242043FC000A4F9A /* Genre.swift */,
+				C5CA9542242060A0000A4F9A /* Response.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +254,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5CA953C24203F32000A4F9A /* AlbumJsonData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,9 +265,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5CA9541242043FC000A4F9A /* Genre.swift in Sources */,
 				C5C291AB24201342003F8790 /* AlbumViewModel.swift in Sources */,
+				C5CA9543242060A0000A4F9A /* Response.swift in Sources */,
 				C5C2918924200A50003F8790 /* AlbumViewController.swift in Sources */,
+				C5CA953824203713000A4F9A /* WebService.swift in Sources */,
+				C5CA953624203707000A4F9A /* Bindable.swift in Sources */,
 				C5C291AF242015CD003F8790 /* AlbumViewCell.swift in Sources */,
+				C5CA953A24203B1A000A4F9A /* Album.swift in Sources */,
 				C5C291B324201603003F8790 /* AlbumCellViewModel.swift in Sources */,
 				C5C2918724200A50003F8790 /* AppDelegate.swift in Sources */,
 			);

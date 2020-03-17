@@ -7,36 +7,17 @@
 //
 
 import Foundation
-import UIKit
 
 class AlbumCellViewModel {
     let albumName: String?
     let artist: String?
-    let thumbnailImage: UIImage?
-    let service: WebService?
+    let thumbnailImageData: Data?
     
-    init(albumName: String?, artist: String?, thumbnailImage: UIImage?, service: WebService = AppStoreService()) {
+    init(albumName: String?, artist: String?, thumbnailImageData: Data?) {
         self.albumName = albumName
         self.artist = artist
-        self.thumbnailImage = thumbnailImage
-        self.service = service
+        self.thumbnailImageData = thumbnailImageData
     }
-    
-//    func fetchThumbNailImage(completion: @escaping(UIImage?, _ errorString: String?) -> Void) {
-//
-//        guard let urlString = albumArtThumbNailURlString, let url = URL(string: urlString) else {
-//            completion(nil, "Invalid URL string")
-//            return
-//        }
-//        service?.downLoadImageFrom(url: url, completion: { (data, _, error) in
-//            guard let data = data, error == nil else {
-//                completion(nil, error?.localizedDescription)
-//                return
-//            }
-//            let image = UIImage(data: data)
-//            completion(image, nil)
-//        })
-//    }
 }
 
 

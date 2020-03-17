@@ -9,8 +9,7 @@
 import UIKit
 
 class AlbumViewCell: UITableViewCell {
-    
-//    Each cell should display the name of the album, the artist, and the album art (thumbnail image).
+
     var viewModel: AlbumCellViewModel?
     
     var albumLabel: UILabel = {
@@ -85,7 +84,9 @@ extension AlbumViewCell: Bindable {
         }
         artistLabel.text = viewModel.artist
         albumLabel.text = viewModel.albumName
-        thumbnailImage.image = viewModel.thumbnailImage
+        if let imageData = viewModel.thumbnailImageData {
+            thumbnailImage.image = UIImage(data: imageData)
+        }
     }
     
 //    fileprivate func fetchThumbnailImage() {

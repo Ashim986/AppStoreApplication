@@ -9,7 +9,7 @@
 import UIKit
 
 class AlbumViewController: UITableViewController {
-    var viewModel: AlbumViewModel?
+    let viewModel = AlbumViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +18,7 @@ class AlbumViewController: UITableViewController {
     }
     
     private func registerTableViewCell() {
-        
+        tableView.register(AlbumViewCell.self, forCellReuseIdentifier: AlbumViewCell.identifier)
     }
     
     private func setupNavigationItem() {
@@ -31,20 +31,18 @@ class AlbumViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 5
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "title"
+        guard var cell = tableView.dequeueReusableCell(withIdentifier: AlbumViewCell.identifier) as? AlbumViewCell else {
+            fatalError("Unable to dequeue cell")
+        }
+        let albumCellViewModel = viewModel.getAlbumViewModel(at: indexPath)
+        cell.setViewModel(to: albumCellViewModel)
         return cell
     }
     
-}
-
-extension AlbumViewController: Bindable {
-    func bindViewModel() {
-        print("executed viewModel")
-    }
     
 }
+
