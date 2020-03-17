@@ -24,14 +24,16 @@ class AlbumDetailView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 24, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         return label
     }()
     
     var artistLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
@@ -41,6 +43,7 @@ class AlbumDetailView: UIView {
     var genere: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -48,21 +51,23 @@ class AlbumDetailView: UIView {
     
     var releaseDate: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     var copyWrite: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let submitButton: UIButton = {
         let button = UIButton(type: .system)
-        button.titleLabel?.text = "Submit"
+        button.backgroundColor = .green
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
         return button
@@ -73,7 +78,7 @@ class AlbumDetailView: UIView {
     }
     
     override init(frame: CGRect) {
-        super.init(frame: .zero)
+        super.init(frame: frame)
         setupView()
     }
     
@@ -93,41 +98,41 @@ class AlbumDetailView: UIView {
             albumImageView.safeAreaLayoutGuide.topAnchor.constraint(equalTo: topAnchor),
             albumImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
             albumImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            albumImageView.heightAnchor.constraint(equalToConstant: 200)
+            albumImageView.heightAnchor.constraint(equalToConstant: 400)
         ])
         NSLayoutConstraint.activate([
             albumLabel.safeAreaLayoutGuide.topAnchor.constraint(equalTo: albumImageView.bottomAnchor, constant: 16),
             albumLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             albumLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            albumLabel.heightAnchor.constraint(equalToConstant: 48)
+            albumLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 32)
         ])
         
         NSLayoutConstraint.activate([
             artistLabel.safeAreaLayoutGuide.topAnchor.constraint(equalTo: albumLabel.bottomAnchor, constant: 4),
             artistLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             artistLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            artistLabel.heightAnchor.constraint(equalToConstant: 48)
+            artistLabel.heightAnchor.constraint(equalToConstant: 24)
         ])
         
         NSLayoutConstraint.activate([
             releaseDate.safeAreaLayoutGuide.topAnchor.constraint(equalTo: artistLabel.bottomAnchor, constant: 4),
             releaseDate.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             releaseDate.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            releaseDate.heightAnchor.constraint(equalToConstant: 48)
+            releaseDate.heightAnchor.constraint(equalToConstant: 32)
         ])
         
         NSLayoutConstraint.activate([
             genere.safeAreaLayoutGuide.topAnchor.constraint(equalTo: releaseDate.bottomAnchor, constant: 4),
             genere.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             genere.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            genere.heightAnchor.constraint(equalToConstant: 48)
+            genere.heightAnchor.constraint(equalToConstant: 24)
         ])
         
         NSLayoutConstraint.activate([
-            copyWrite.safeAreaLayoutGuide.topAnchor.constraint(equalTo: albumImageView.bottomAnchor, constant: 8),
+            copyWrite.topAnchor.constraint(equalTo: genere.bottomAnchor, constant: 4),
             copyWrite.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             copyWrite.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            copyWrite.heightAnchor.constraint(equalToConstant: 48)
+            copyWrite.heightAnchor.constraint(equalToConstant: 24)
         ])
         
         NSLayoutConstraint.activate([
@@ -150,9 +155,16 @@ extension AlbumDetailView: Bindable {
         }
         
         if let imageString = viewModel.albumImageString {
-            albumImageView.loadImageUingCasheWithUrlString(urlString: imageString)
+            DispatchQueue.main.async { [weak self] in
+                self?.albumImageView.loadImageUingCasheWithUrlString(urlString: imageString)
+                self?.layoutIfNeeded()
+            }
         }
-        
+        albumLabel.text = "Album name: \(viewModel.albumName ?? "")"
+        artistLabel.text = "Artist: \(viewModel.artistName ?? "")"
+        releaseDate.text = "Release Date: \(viewModel.releaseDate ?? "")"
+        genere.text = viewModel.getGenreStringValue()
+        copyWrite.text = viewModel.copywrite
     }
 }
 

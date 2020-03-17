@@ -11,15 +11,12 @@ import UIKit
 
 protocol AlbumViewModelDelegate: class {
     func showError(with title: String, message: String?)
-    func success()
+    func showSuccess()
 }
 
 class AlbumViewModel {
     let title = "Album"
     let service: WebService?
-    var albumName: String?
-    var artistName: String?
-    var imageString: String?
     var albums: [Album]?
     var isLoading: Bool = true
     
@@ -37,22 +34,28 @@ class AlbumViewModel {
                 return
             }
             self?.albums = data
-            self?.delegate?.success()
+            self?.delegate?.showSuccess()
             self?.isLoading = false
         })
     }
     
-    private func setUpValue(at indexPath: IndexPath) {
+    private func getAlbum(at indexPath: IndexPath) -> Album? {
         guard let album = albums?[indexPath.row] else {
-            return
+            return nil
         }
-        albumName = album.albumName
-        artistName = album.artistName
-        imageString = album.albumImageURLString
+        return album
     }
     
     func getAlbumViewModel(at indexPath: IndexPath) -> AlbumCellViewModel? {
-        setUpValue(at: indexPath)
+        let album = getAlbum(at: indexPath)
+        let albumName = album?.albumName
+        let artistName = album?.artistName
+        let imageString = album?.albumImageURLString
         return AlbumCellViewModel(albumName: albumName, artist: artistName, thumbnailImageString: imageString)
+    }
+    
+    func getAlbumDetailInfoViewModel(at indexPath: IndexPath) -> AlbumDetailInfoViewModel? {
+        
+        return AlbumDetailInfoViewModel(album: getAlbum(at: indexPath))
     }
 }

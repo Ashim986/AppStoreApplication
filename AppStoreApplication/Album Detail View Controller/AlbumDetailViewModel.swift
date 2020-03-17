@@ -16,18 +16,20 @@ class AlbumDetailViewModel {
     let genres: [Genre]?
     let copywrite: String?
     
-    init(album: Album) {
-        albumImageString = album.albumImageURLString
-        albumName = album.albumName
-        artistName = album.artistName
-        releaseDate = album.releaseDate
-        genres = album.generes
-        copywrite = album.copyright
+    init(album: Album?) {
+        albumImageString = album?.albumImageURLString
+        albumName = album?.albumName
+        artistName = album?.artistName
+        releaseDate = album?.releaseDate
+        genres = album?.generes
+        copywrite = album?.copyright
     }
     
-    func getGenreStringValue() -> String? {
-        return genres?.compactMap{ (genre) -> String? in
+    func getGenreStringValue() -> String {
+        let generes =  genres?.compactMap{ (genre) -> String? in
             return genre.name
         }.joined(separator: ", ")
+        
+        return String(format: "Generes: %@", generes ?? "")
     }
 }

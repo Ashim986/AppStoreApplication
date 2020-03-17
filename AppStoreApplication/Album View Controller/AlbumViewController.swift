@@ -29,7 +29,10 @@ class AlbumViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("selected index path = \(indexPath.row)")
+        let albumDetailInfoViewModel = viewModel.getAlbumDetailInfoViewModel(at: indexPath)
+        var albumDetailInfoViewController = AlbumDetailInfoViewController()
+        albumDetailInfoViewController.setViewModel(to: albumDetailInfoViewModel)
+        navigationController?.pushViewController(albumDetailInfoViewController, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,7 +66,7 @@ class AlbumViewController: UITableViewController {
 }
 
 extension AlbumViewController: AlbumViewModelDelegate {
-    func success() {
+    func showSuccess() {
         DispatchQueue.main.async { [weak self] in
             self?.tableView.reloadData()
         }
