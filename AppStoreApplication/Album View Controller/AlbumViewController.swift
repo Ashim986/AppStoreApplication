@@ -48,8 +48,8 @@ class AlbumViewController: UITableViewController {
         if viewModel.isLoading {
             let cell = UITableViewCell()
             cell.textLabel?.text = "Loading ..."
-            cell.textLabel?.font = UIFont.systemFont(ofSize: 20, weight: .light)
-            cell.textLabel?.textColor = .lightGray
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+            cell.textLabel?.textColor = .gray
             return cell
         } else {
             guard var cell = tableView.dequeueReusableCell(withIdentifier: AlbumViewCell.identifier) as? AlbumViewCell else {

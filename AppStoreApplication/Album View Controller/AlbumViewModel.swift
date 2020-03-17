@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol AlbumViewModelDelegate: class {
     func showError(with title: String, message: String?)

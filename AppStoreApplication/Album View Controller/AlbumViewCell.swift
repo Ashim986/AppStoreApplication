@@ -16,7 +16,6 @@ class AlbumViewCell: UITableViewCell {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.text = "Loading ..."
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 24, weight: .regular)
         return label
