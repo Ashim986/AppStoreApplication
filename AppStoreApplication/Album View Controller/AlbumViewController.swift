@@ -40,7 +40,7 @@ class AlbumViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if viewModel.isLoading && viewModel.albums?.count == 0 {
+        if viewModel.isLoading && viewModel.albums == nil {
             return 40.0
         } else if !viewModel.isLoading && viewModel.albums?.count ?? 0 > 1 {
             return 80.0
