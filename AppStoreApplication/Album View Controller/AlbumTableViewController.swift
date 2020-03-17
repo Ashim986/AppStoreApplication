@@ -1,14 +1,14 @@
 //
-//  AlbumViewController.swift
+//  AlbumTableViewController.swift
 //  AppStoreApplication
 //
-//  Created by ashim Dahal on 3/16/20.
+//  Created by ashim Dahal on 3/17/20.
 //  Copyright © 2020 ashim Dahal. All rights reserved.
 //
 
 import UIKit
 
-class AlbumViewController: UITableViewController {
+class AlbumTableViewController: UITableViewController {
     let viewModel = AlbumViewModel()
     
     override func viewDidLoad() {
@@ -67,7 +67,7 @@ class AlbumViewController: UITableViewController {
     }
 }
 
-extension AlbumViewController: AlbumViewModelDelegate {
+extension AlbumTableViewController: AlbumViewModelDelegate {
     func showSuccess() {
         DispatchQueue.main.async { [weak self] in
             self?.tableView.reloadData()

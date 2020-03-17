@@ -52,8 +52,7 @@ extension AlbumDetailInfoViewController: AlbumDetailViewDelegate, SFSafariViewCo
     func didTappedButtonForItunesStore() {
         if let urlString = viewModel?.urlString?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
             guard let url = makeValidURL(urlString: urlString) else { return }
-            let config = SFSafariViewController.Configuration()
-            let safariVC: SFSafariViewController = SFSafariViewController(url: url, configuration: config)
+            let safariVC: SFSafariViewController = SFSafariViewController(url: url)
             safariVC.delegate = self
             self.present(safariVC, animated: false)
         }

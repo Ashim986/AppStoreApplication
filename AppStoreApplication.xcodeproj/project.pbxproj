@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C5C2918724200A50003F8790 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C2918624200A50003F8790 /* AppDelegate.swift */; };
-		C5C2918924200A50003F8790 /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C2918824200A50003F8790 /* AlbumViewController.swift */; };
 		C5C2918C24200A50003F8790 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5C2918A24200A50003F8790 /* Main.storyboard */; };
 		C5C2918E24200A51003F8790 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5C2918D24200A51003F8790 /* Assets.xcassets */; };
 		C5C2919124200A51003F8790 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5C2918F24200A51003F8790 /* LaunchScreen.storyboard */; };
@@ -35,6 +34,7 @@
 		C5CA955B2421207C000A4F9A /* AlbumViewModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA955A2421207C000A4F9A /* AlbumViewModelBuilder.swift */; };
 		C5CA955D242121B9000A4F9A /* AlbumDetailInfoViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA955C242121B9000A4F9A /* AlbumDetailInfoViewModelTests.swift */; };
 		C5CA955F24212CB0000A4F9A /* AlbumViewMockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA955E24212CB0000A4F9A /* AlbumViewMockService.swift */; };
+		C5CA956124214DED000A4F9A /* AlbumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA956024214DED000A4F9A /* AlbumTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +50,6 @@
 /* Begin PBXFileReference section */
 		C5C2918324200A50003F8790 /* AppStoreApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStoreApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5C2918624200A50003F8790 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C5C2918824200A50003F8790 /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 		C5C2918B24200A50003F8790 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C5C2918D24200A51003F8790 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C5C2919024200A51003F8790 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -79,6 +78,7 @@
 		C5CA955A2421207C000A4F9A /* AlbumViewModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModelBuilder.swift; sourceTree = "<group>"; };
 		C5CA955C242121B9000A4F9A /* AlbumDetailInfoViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailInfoViewModelTests.swift; sourceTree = "<group>"; };
 		C5CA955E24212CB0000A4F9A /* AlbumViewMockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewMockService.swift; sourceTree = "<group>"; };
+		C5CA956024214DED000A4F9A /* AlbumTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,7 +154,7 @@
 		C5C291A624200D90003F8790 /* Album View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				C5C2918824200A50003F8790 /* AlbumViewController.swift */,
+				C5CA956024214DED000A4F9A /* AlbumTableViewController.swift */,
 				C5C291AA24201342003F8790 /* AlbumViewModel.swift */,
 				C5C291AE242015CD003F8790 /* AlbumViewCell.swift */,
 				C5C291B224201603003F8790 /* AlbumCellViewModel.swift */,
@@ -316,7 +316,7 @@
 				C5CA955224210F9D000A4F9A /* DateFromatter+Extension.swift in Sources */,
 				C5CA954724208D52000A4F9A /* ImageView+Cashing.swift in Sources */,
 				C5CA9543242060A0000A4F9A /* Response.swift in Sources */,
-				C5C2918924200A50003F8790 /* AlbumViewController.swift in Sources */,
+				C5CA956124214DED000A4F9A /* AlbumTableViewController.swift in Sources */,
 				C5CA954E2420966A000A4F9A /* AlbumDetailView.swift in Sources */,
 				C5CA954A242095E9000A4F9A /* AlbumDetailInfoViewController.swift in Sources */,
 				C5CA953824203713000A4F9A /* WebService.swift in Sources */,
@@ -495,6 +495,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V29G6KEVJT;
 				INFOPLIST_FILE = AppStoreApplication/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -512,6 +513,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V29G6KEVJT;
 				INFOPLIST_FILE = AppStoreApplication/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -530,6 +532,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V29G6KEVJT;
 				INFOPLIST_FILE = AppStoreApplicationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -550,6 +553,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V29G6KEVJT;
 				INFOPLIST_FILE = AppStoreApplicationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
