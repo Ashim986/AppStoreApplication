@@ -7,10 +7,14 @@
 //
 
 import UIKit
+protocol AlbumDetailViewDelegate: class {
+    func didTappedButtonForItunesStore()
+}
 
 class AlbumDetailView: UIView {
     
     var viewModel: AlbumDetailViewModel?
+    weak var delegate: AlbumDetailViewDelegate?
     
     var albumImageView: UIImageView = {
         let imageView = UIImageView()
@@ -79,7 +83,7 @@ class AlbumDetailView: UIView {
     }()
     
     @objc private func submitButtonTapped() {
-        print("button Tapped")
+        delegate?.didTappedButtonForItunesStore()
     }
     
     override init(frame: CGRect) {
@@ -171,8 +175,8 @@ extension AlbumDetailView: Bindable {
         }
         albumLabel.text = "Album name: \(viewModel.albumName ?? "")"
         artistLabel.text = "Artist: \(viewModel.artistName ?? "")"
-        releaseDate.text = "Release Date: \(viewModel.releaseDate ?? "")"
-        genere.text = viewModel.getGenreStringValue()
+        releaseDate.text = viewModel.getReleaseDateText()
+        genere.text = viewModel.getGenresText()
         copywrite.text = viewModel.copywrite
     }
 }

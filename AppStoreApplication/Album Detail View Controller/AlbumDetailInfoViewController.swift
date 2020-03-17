@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SafariServices
 
 class AlbumDetailInfoViewController: UIViewController {
     
@@ -31,6 +32,7 @@ extension AlbumDetailInfoViewController: Bindable {
         }
         title = viewModel.title
         let albumDetailViewModel = viewModel.getAlbumDetailViewModel()
+        albumDetailView.delegate = self
         albumDetailView.setViewModel(to: albumDetailViewModel)
         setupView()
     }
@@ -43,5 +45,15 @@ extension AlbumDetailInfoViewController: Bindable {
             albumDetailView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             albumDetailView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+    }
+}
+
+extension AlbumDetailInfoViewController: AlbumDetailViewDelegate, SFSafariViewControllerDelegate {
+    func didTappedButtonForItunesStore() {
+        guard let urlString = viewModel?.urlString, let url = URL(string: urlString) else { return }
+        let config = SFSafariViewController.Configuration()
+        let safariVC: SFSafariViewController = SFSafariViewController(url: url, configuration: config)
+        safariVC.delegate = self
+        self.present(safariVC, animated: false)
     }
 }

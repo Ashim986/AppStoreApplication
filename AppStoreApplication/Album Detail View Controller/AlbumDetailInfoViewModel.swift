@@ -11,10 +11,12 @@ import Foundation
 class AlbumDetailInfoViewModel {
     var album: Album?
     var title: String?
+    var urlString: String?
     
-    init(album: Album?) {
+    init(album: Album? = nil) {
         self.album = album
         title = album?.albumName
+        urlString = album?.musicAlbumURLString
     }
     
     func getAlbumDetailViewModel() -> AlbumDetailViewModel {
