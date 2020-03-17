@@ -40,10 +40,12 @@ class AlbumViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if viewModel.isLoading {
+        if viewModel.isLoading && viewModel.albums?.count == 0 {
             return 40.0
-        } else {
+        } else if !viewModel.isLoading && viewModel.albums?.count ?? 0 > 1 {
             return 80.0
+        } else {
+            return 0.0
         }
     }
     
@@ -73,12 +75,15 @@ extension AlbumViewController: AlbumViewModelDelegate {
     }
     
     func showError(with title: String, message: String?) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
             let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alertViewController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (_) in
-                self.dismiss(animated: true, completion: nil)
+                self?.dismiss(animated: true, completion: {
+                    self?.viewModel.isLoading = false
+                    self?.tableView.reloadData()
+                })
             }))
-            self.present(alertViewController, animated: true, completion: nil)
+            self?.present(alertViewController, animated: true, completion: nil)
         }
     }
 }

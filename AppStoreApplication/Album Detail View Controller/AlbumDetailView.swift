@@ -147,7 +147,7 @@ class AlbumDetailView: UIView {
         NSLayoutConstraint.activate([
             submitButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             submitButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            submitButton.topAnchor.constraint(equalTo: copywrite.bottomAnchor, constant: 30),
+            submitButton.topAnchor.constraint(equalTo: copywrite.bottomAnchor, constant: 60),
             submitButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
         ])
         
@@ -168,10 +168,7 @@ extension AlbumDetailView: Bindable {
         }
         
         if let imageString = viewModel.albumImageString {
-            DispatchQueue.main.async { [weak self] in
-                self?.albumImageView.loadImageUingCasheWithUrlString(urlString: imageString)
-                self?.layoutIfNeeded()
-            }
+        albumImageView.loadImageUingCasheWithUrlString(urlString: imageString)
         }
         albumLabel.text = "Album name: \(viewModel.albumName ?? "")"
         artistLabel.text = "Artist: \(viewModel.artistName ?? "")"
