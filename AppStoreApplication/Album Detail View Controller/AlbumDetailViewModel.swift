@@ -16,7 +16,7 @@ class AlbumDetailViewModel {
     let genres: [Genre]?
     let copywrite: String?
     
-    init(album: Album?) {
+    init(album: Album? = nil) {
         albumImageString = album?.albumImageURLString
         albumName = album?.albumName
         artistName = album?.artistName
@@ -25,11 +25,20 @@ class AlbumDetailViewModel {
         copywrite = album?.copyright
     }
     
-    func getGenreStringValue() -> String {
+    func getGenresText() -> String {
         let generes =  genres?.compactMap{ (genre) -> String? in
             return genre.name
         }.joined(separator: ", ")
         
         return String(format: "Generes: %@", generes ?? "")
+    }
+    
+    func getReleaseDateText() -> String? {
+        guard let releaseDate = releaseDate else {
+            return nil
+        }
+        let date = DateFormatter.serviceDate.date(from: releaseDate)
+        let dateString = DateFormatter.longDate.string(from: date ?? Date())
+        return String(format: "Release Date : %@", dateString)
     }
 }

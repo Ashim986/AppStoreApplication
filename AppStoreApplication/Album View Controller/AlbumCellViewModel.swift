@@ -13,7 +13,7 @@ class AlbumCellViewModel {
     let artist: String?
     let thumbnailImageString: String?
     
-    init(albumName: String?, artist: String?, thumbnailImageString: String?) {
+    init(albumName: String? = nil, artist: String? = nil, thumbnailImageString: String? = nil) {
         self.albumName = albumName
         self.artist = artist
         self.thumbnailImageString = thumbnailImageString
