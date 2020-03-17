@@ -148,7 +148,7 @@ class AlbumDetailView: UIView {
             submitButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             submitButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             submitButton.heightAnchor.constraint(equalToConstant: 48),
-            submitButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+            submitButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
         ])
 
     }

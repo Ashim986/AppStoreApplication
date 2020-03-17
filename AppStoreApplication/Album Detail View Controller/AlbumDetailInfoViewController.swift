@@ -16,7 +16,7 @@ class AlbumDetailInfoViewController: UIViewController {
     
     lazy var scrollView: UIScrollView = {
        let scrollView = UIScrollView()
-        scrollView.contentSize.height = 2000
+        scrollView.contentSize.height = 800
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
