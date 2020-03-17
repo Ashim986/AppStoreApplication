@@ -71,7 +71,7 @@ class AlbumDetailView: UIView {
     
     let submitButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = .lightGray
+        button.backgroundColor = UIColor(red: 200/255, green: 200/255, blue: 255/255, alpha: 0.8)
         button.setTitle("ItunesStore", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
