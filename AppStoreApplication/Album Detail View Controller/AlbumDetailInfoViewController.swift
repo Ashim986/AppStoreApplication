@@ -16,10 +16,11 @@ class AlbumDetailInfoViewController: UIViewController {
     
     lazy var scrollView: UIScrollView = {
        let scrollView = UIScrollView()
-        scrollView.isScrollEnabled = true
+        scrollView.contentSize.height = 2000
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
+    
     var albumDetailView: AlbumDetailView = {
         let albumDetailView = AlbumDetailView()
         albumDetailView.translatesAutoresizingMaskIntoConstraints = false
@@ -49,16 +50,16 @@ extension AlbumDetailInfoViewController: Bindable {
         scrollView.addSubview(albumDetailView)
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.bottomAnchor.constraint(greaterThanOrEqualTo: view.bottomAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.widthAnchor.constraint(equalTo: view.widthAnchor)
         ])
         
         NSLayoutConstraint.activate([
             albumDetailView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 8),
-            albumDetailView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -8),
-            albumDetailView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            albumDetailView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor)
+            albumDetailView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            albumDetailView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            albumDetailView.trailingAnchor.constraint(equalTo: view.trailingAnchor , constant: -10)
         ])
     }
 }
