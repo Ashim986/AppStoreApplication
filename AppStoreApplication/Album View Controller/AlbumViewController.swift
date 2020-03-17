@@ -37,16 +37,28 @@ class AlbumViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        if viewModel.isLoading {
+            return 40.0
+        } else {
+            return 80.0
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard var cell = tableView.dequeueReusableCell(withIdentifier: AlbumViewCell.identifier) as? AlbumViewCell else {
-            fatalError("Unable to dequeue cell")
+        if viewModel.isLoading {
+            let cell = UITableViewCell()
+            cell.textLabel?.text = "Loading ..."
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 20, weight: .light)
+            cell.textLabel?.textColor = .lightGray
+            return cell
+        } else {
+            guard var cell = tableView.dequeueReusableCell(withIdentifier: AlbumViewCell.identifier) as? AlbumViewCell else {
+                fatalError("Unable to dequeue cell")
+            }
+            let albumCellViewModel = viewModel.getAlbumViewModel(at: indexPath)
+            cell.setViewModel(to: albumCellViewModel)
+            return cell
         }
-        let albumCellViewModel = viewModel.getAlbumViewModel(at: indexPath)
-        cell.setViewModel(to: albumCellViewModel)
-        return cell
     }
 }
 
@@ -59,8 +71,8 @@ extension AlbumViewController: AlbumViewModelDelegate {
     
     func showError(with title: String, message: String?) {
         DispatchQueue.main.async {
-            let alertViewController = UIAlertController()
-            alertViewController.addAction(UIAlertAction(title: title, style: .default, handler: { (_) in
+            let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alertViewController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (_) in
                 self.dismiss(animated: true, completion: nil)
             }))
             self.present(alertViewController, animated: true, completion: nil)

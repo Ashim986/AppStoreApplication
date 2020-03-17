@@ -14,14 +14,13 @@ protocol AlbumViewModelDelegate: class {
 }
 
 class AlbumViewModel {
-    
     let title = "Album"
     let service: WebService?
-    
     var albumName: String?
     var artistName: String?
     var imageString: String?
     var albums: [Album]?
+    var isLoading: Bool = true
     
     weak var delegate: AlbumViewModelDelegate?
     
@@ -33,10 +32,12 @@ class AlbumViewModel {
         service?.downloadAlbumData(completion: { [weak self](data, error) in
             guard let data = data, error == nil else {
                 self?.delegate?.showError(with: "Error", message: error?.localizedDescription)
+                self?.isLoading = false
                 return
             }
             self?.albums = data
             self?.delegate?.success()
+            self?.isLoading = false
         })
     }
     
@@ -53,19 +54,4 @@ class AlbumViewModel {
         setUpValue(at: indexPath)
         return AlbumCellViewModel(albumName: albumName, artist: artistName, thumbnailImageString: imageString)
     }
-    
-
-//    func fetchThumbNailImage() {
-//
-//        guard let urlString = imageString, let url = URL(string: urlString) else {
-//            return
-//        }
-//        service?.downloadImageFrom(url: url, completion: { [weak self](data, _, error) in
-//            guard let data = data, error == nil else {
-//                self?.delegate?.showError(with: "Error", message: error?.localizedDescription)
-//                return
-//            }
-//            self?.thumbnailImageData = data
-//        })
-//    }
 }

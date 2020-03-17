@@ -9,8 +9,6 @@
 import Foundation
 
 protocol WebService {
-    typealias DownloadCompletion = (Data?, URLResponse?, Error?) -> Void
-    func downloadImageFrom(url: URL, completion: DownloadCompletion?)
     typealias AlbumDataCompletion = ([Album]?, Error?) -> Void
     func downloadAlbumData(completion: AlbumDataCompletion?)
 }
@@ -34,11 +32,5 @@ class AppStoreService: WebService {
                 }
             }.resume()
         }
-    }
-    
-    func downloadImageFrom(url: URL, completion: WebService.DownloadCompletion?) {
-        URLSession.shared.dataTask(with: url) { (data, _, error) in
-            completion?(data, nil, error)
-        }.resume()
     }
 }

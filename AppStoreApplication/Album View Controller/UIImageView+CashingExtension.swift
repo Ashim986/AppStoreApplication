@@ -10,7 +10,7 @@ import UIKit
 
 let imageCashe = NSCache<NSString, UIImage>()
 
-extension UIImageView{
+extension UIImageView {
     
     func loadImageUingCasheWithUrlString(urlString : String){
        // check for cache Image first
@@ -23,7 +23,8 @@ extension UIImageView{
         
         if let url = URL(string: urlString) {
             URLSession.shared.dataTask(with: url, completionHandler: { (data, respons, error) in
-                // download hit an error so lets retun out
+                // Displaying image for which data is available
+                // If data is not available image will set to default instead of throwing error.
                 guard let data = data, error == nil else {
                     print(error?.localizedDescription as Any)
                     return
