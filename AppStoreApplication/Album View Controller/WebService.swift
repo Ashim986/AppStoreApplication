@@ -11,26 +11,28 @@ import Foundation
 protocol WebService {
     typealias DownloadCompletion = (Data?, URLResponse?, Error?) -> Void
     func downloadImageFrom(url: URL, completion: DownloadCompletion?)
-    func downloadAlbumDataFrom(url: URL, completion: DownloadCompletion?)
+    typealias AlbumDataCompletion = ([Album]?, Error?) -> Void
+    func downloadAlbumData(completion: AlbumDataCompletion?)
 }
 
 class AppStoreService: WebService {
-    func downloadAlbumDataFrom(url: URL, completion: WebService.DownloadCompletion?) {
-        URLSession.shared.dataTask(with: url) { (data, _, error) in
-            guard let data = data, error == nil else {
-                completion?(nil, nil, error)
-                return
-            }
-            
-            let decoder = JSONDecoder()
-            do {
-                let result = try? decoder.decode(Response.self, from: data)
+    func downloadAlbumData(completion: WebService.AlbumDataCompletion?) {
+        let baseURLString = "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/10/explicit.jsonaaa"
+        if let baseURL = URL(string: baseURLString) {
+            URLSession.shared.dataTask(with: baseURL) { (data, _, error) in
+                guard let data = data, error == nil else {
+                    completion?(nil, error)
+                    return
+                }
                 
-                print(result)
-                completion?(nil, nil, nil)
-            } catch let error {
-                completion?(nil, nil, error)
-            }
+                let decoder = JSONDecoder()
+                do {
+                    let response = try decoder.decode(Response.self, from: data)
+                    completion?(response.feed?.results, nil)
+                } catch let jsonErr {
+                    completion?(nil, jsonErr)
+                }
+            }.resume()
         }
     }
     

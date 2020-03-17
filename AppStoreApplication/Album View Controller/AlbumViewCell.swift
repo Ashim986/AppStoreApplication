@@ -17,7 +17,7 @@ class AlbumViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 24, weight: .regular)
         return label
     }()
     
@@ -26,7 +26,7 @@ class AlbumViewCell: UITableViewCell {
         label.numberOfLines = 0
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         return label
     }()
     
@@ -38,12 +38,16 @@ class AlbumViewCell: UITableViewCell {
     
     static let identifier = "com.CompanyName.AlbumViewCell"
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        initilizeView()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupView()
     }
     
-    private func initilizeView() {
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupView() {
         addSubview(albumLabel)
         addSubview(artistLabel)
         addSubview(thumbnailImage)
@@ -53,21 +57,21 @@ class AlbumViewCell: UITableViewCell {
     private func setupAnchor() {
         NSLayoutConstraint.activate([
             thumbnailImage.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            thumbnailImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            thumbnailImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 8),
-            thumbnailImage.widthAnchor.constraint(equalToConstant: 80)
+            thumbnailImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            thumbnailImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            thumbnailImage.widthAnchor.constraint(equalToConstant: 48)
             ])
         NSLayoutConstraint.activate([
-            albumLabel.topAnchor.constraint(equalTo: thumbnailImage.topAnchor),
-            albumLabel.leadingAnchor.constraint(equalTo: thumbnailImage.trailingAnchor, constant: 8),
-            albumLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 8),
-            albumLabel.heightAnchor.constraint(equalToConstant: 32)
+            albumLabel.topAnchor.constraint(equalTo: thumbnailImage.topAnchor, constant: 8),
+            albumLabel.leadingAnchor.constraint(equalTo: thumbnailImage.trailingAnchor, constant: 16),
+            albumLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            albumLabel.heightAnchor.constraint(equalToConstant: 24)
             ])
         NSLayoutConstraint.activate([
-            albumLabel.leadingAnchor.constraint(equalTo: thumbnailImage.trailingAnchor, constant: 8),
-            albumLabel.trailingAnchor.constraint(equalTo: albumLabel.trailingAnchor),
-            albumLabel.heightAnchor.constraint(equalToConstant: 32),
-            artistLabel.bottomAnchor.constraint(equalTo: thumbnailImage.bottomAnchor)
+            artistLabel.leadingAnchor.constraint(equalTo: thumbnailImage.trailingAnchor, constant: 16),
+            artistLabel.trailingAnchor.constraint(equalTo: albumLabel.trailingAnchor),
+            artistLabel.heightAnchor.constraint(equalToConstant: 24),
+            artistLabel.bottomAnchor.constraint(equalTo: thumbnailImage.bottomAnchor, constant: -8)
             ])
     }
 
@@ -84,25 +88,10 @@ extension AlbumViewCell: Bindable {
         }
         artistLabel.text = viewModel.artist
         albumLabel.text = viewModel.albumName
-        if let imageData = viewModel.thumbnailImageData {
-            thumbnailImage.image = UIImage(data: imageData)
+        DispatchQueue.main.async { [weak self] in
+            if let imageData = viewModel.thumbnailImageData {
+                self?.thumbnailImage.image = UIImage(data: imageData)
+            }
         }
     }
-    
-//    fileprivate func fetchThumbnailImage() {
-//        
-//        viewModel?.fetchThumbNailImage(completion: { [weak self] (image, errorString) in
-//            DispatchQueue.main.async {
-//                guard let image = image, errorString == nil else {
-//                    let alertController = UIAlertController()
-//                    alertController.addAction(UIAlertAction(title: "Error", style: .default, handler: { (_) in
-//                        self?.dismiss(alertController, animated: true ,completion: nil)
-//                    }))
-//                    self?.present(alertController, animated: true ,completion: nil)
-//                    return
-//                }
-//                self?.thumbnailImage.image = image
-//            }
-//        })
-//    }
 }

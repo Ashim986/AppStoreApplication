@@ -13,8 +13,10 @@ class AlbumViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
         setupNavigationItem()
         registerTableViewCell()
+        viewModel.fetchAlbumData()
     }
     
     private func registerTableViewCell() {
@@ -31,7 +33,11 @@ class AlbumViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return viewModel.albums?.count ?? 1
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -42,7 +48,23 @@ class AlbumViewController: UITableViewController {
         cell.setViewModel(to: albumCellViewModel)
         return cell
     }
+}
+
+extension AlbumViewController: AlbumViewModelDelegate {
+    func success() {
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
+    }
     
-    
+    func showError(with title: String, message: String?) {
+        DispatchQueue.main.async {
+            let alertViewController = UIAlertController()
+            alertViewController.addAction(UIAlertAction(title: title, style: .default, handler: { (_) in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            self.present(alertViewController, animated: true, completion: nil)
+        }
+    }
 }
 

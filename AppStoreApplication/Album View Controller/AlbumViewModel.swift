@@ -7,49 +7,67 @@
 //
 
 import Foundation
-import UIKit
+
+protocol AlbumViewModelDelegate: class {
+    func showError(with title: String, message: String?)
+    func success()
+}
 
 class AlbumViewModel {
-    
-    struct AlbumData {
-        let albumName: String?
-        let artist: String?
-        let thumbnailImage: UIImage?
-    }
     
     let title = "Album"
     let service: WebService?
     
     var albumName: String?
-    var artist: String?
-    var thumbnailImage: UIImage?
+    var artistName: String?
+    var imageString: String?
+    var thumbnailImageData: Data?
+    var albums: [Album]?
+    
+    weak var delegate: AlbumViewModelDelegate?
     
     init(service: WebService = AppStoreService()) {
         self.service = service
     }
     
     func fetchAlbumData() {
-        
+        service?.downloadAlbumData(completion: { [weak self](data, error) in
+            guard let data = data, error == nil else {
+                self?.delegate?.showError(with: "Error", message: error?.localizedDescription)
+                return
+            }
+            self?.albums = data
+            self?.delegate?.success()
+        })
+    }
+    
+    private func setUpValue(at indexPath: IndexPath) {
+        guard let album = albums?[indexPath.row] else {
+            return
+        }
+        albumName = album.albumName
+        artistName = album.artistName
+        imageString = album.albumImageURLString
+        fetchThumbNailImage()
     }
     
     func getAlbumViewModel(at indexPath: IndexPath) -> AlbumCellViewModel? {
-        return AlbumCellViewModel(albumName: "album name", artist: "artist name", thumbnailImageData: nil)
+        setUpValue(at: indexPath)
+        return AlbumCellViewModel(albumName: albumName, artist: artistName, thumbnailImageData: thumbnailImageData)
     }
     
 
-    func fetchThumbNailImage(completion: @escaping(UIImage?, _ errorString: String?) -> Void) {
+    func fetchThumbNailImage() {
         
-        guard let urlString = albumName, let url = URL(string: urlString) else {
-            completion(nil, "Invalid URL string")
+        guard let urlString = imageString, let url = URL(string: urlString) else {
             return
         }
-        service?.downloadImageFrom(url: url, completion: { (data, _, error) in
+        service?.downloadImageFrom(url: url, completion: { [weak self](data, _, error) in
             guard let data = data, error == nil else {
-                completion(nil, error?.localizedDescription)
+                self?.delegate?.showError(with: "Error", message: error?.localizedDescription)
                 return
             }
-            let image = UIImage(data: data)
-            completion(image, nil)
+            self?.thumbnailImageData = data
         })
     }
 }
