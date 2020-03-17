@@ -147,13 +147,10 @@ class AlbumDetailView: UIView {
         NSLayoutConstraint.activate([
             submitButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             submitButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            submitButton.topAnchor.constraint(equalTo: copywrite.bottomAnchor, constant: 60),
+            submitButton.heightAnchor.constraint(equalToConstant: 48),
             submitButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
         ])
-        
-        let submitButtonTopAnchor = submitButton.heightAnchor.constraint(equalToConstant: 48)
-        submitButtonTopAnchor.isActive = true
-        submitButtonTopAnchor.priority = UILayoutPriority(500)
+
     }
     
     required init?(coder: NSCoder) {

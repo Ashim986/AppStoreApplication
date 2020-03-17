@@ -58,8 +58,8 @@ extension AlbumDetailInfoViewController: Bindable {
         NSLayoutConstraint.activate([
             albumDetailView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 8),
             albumDetailView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            albumDetailView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            albumDetailView.trailingAnchor.constraint(equalTo: view.trailingAnchor , constant: -10)
+            albumDetailView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            albumDetailView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
 }
