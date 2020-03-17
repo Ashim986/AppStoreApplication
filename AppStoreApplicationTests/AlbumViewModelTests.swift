@@ -19,4 +19,39 @@ class AlbumViewModelTests: XCTestCase {
         XCTAssertNil(albumViewModel.albums)
        }
     
+    func testInitilizeData() {
+        let mockService = AlbumViewMockService()
+        let albumViewModel = AlbumViewModel(service: mockService)
+        albumViewModel.delegate = mockService
+        let expectationForFetchData = expectation(description: "fetch album data async expetation")
+        mockService.asyncExpectation = expectationForFetchData
+        albumViewModel.fetchAlbumData()
+        waitForExpectations(timeout: 5.0) { (error) in
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+            XCTAssertEqual(albumViewModel.albums?.first?.albumName, "Artist 2.0")
+            XCTAssertFalse(albumViewModel.isLoading)
+        }
+    }
+    
+    func testGetAlbumViewModelAndgetAlbumDetailInfoViewModel() {
+        let mockService = AlbumViewMockService()
+        let albumViewModel = AlbumViewModel(service: mockService)
+        albumViewModel.delegate = mockService
+        let expectationForFetchData = expectation(description: "fetch album data async expetation")
+        mockService.asyncExpectation = expectationForFetchData
+        albumViewModel.fetchAlbumData()
+        waitForExpectations(timeout: 5.0) { (error) in
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+            let indexPath = IndexPath(row: 0, section: 0)
+            let albumInfoDetailViewModel = albumViewModel.getAlbumDetailInfoViewModel(at: indexPath)
+           
+            let albumCellViewModel = albumViewModel.getAlbumCellViewModel(at: indexPath)
+            XCTAssertEqual(albumInfoDetailViewModel?.album?.artistName, "A Boogie wit da Hoodie")
+            XCTAssertEqual(albumCellViewModel?.artist, "A Boogie wit da Hoodie")
+        }
+    }
 }

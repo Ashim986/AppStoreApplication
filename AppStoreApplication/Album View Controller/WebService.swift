@@ -34,3 +34,8 @@ class AppStoreService: WebService {
         }
     }
 }
+
+class MockWebService: WebService {
+    func downloadAlbumData(completion: MockWebService.AlbumDataCompletion?) {
+    }
+}

@@ -58,7 +58,7 @@ class AlbumViewController: UITableViewController {
             guard var cell = tableView.dequeueReusableCell(withIdentifier: AlbumViewCell.identifier) as? AlbumViewCell else {
                 fatalError("Unable to dequeue cell")
             }
-            let albumCellViewModel = viewModel.getAlbumViewModel(at: indexPath)
+            let albumCellViewModel = viewModel.getAlbumCellViewModel(at: indexPath)
             cell.setViewModel(to: albumCellViewModel)
             return cell
         }

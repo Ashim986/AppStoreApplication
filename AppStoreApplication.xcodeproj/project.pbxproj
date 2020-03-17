@@ -34,6 +34,7 @@
 		C5CA955924211EF6000A4F9A /* AlbumJsonData.json in Resources */ = {isa = PBXBuildFile; fileRef = C5CA953B24203F32000A4F9A /* AlbumJsonData.json */; };
 		C5CA955B2421207C000A4F9A /* AlbumViewModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA955A2421207C000A4F9A /* AlbumViewModelBuilder.swift */; };
 		C5CA955D242121B9000A4F9A /* AlbumDetailInfoViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA955C242121B9000A4F9A /* AlbumDetailInfoViewModelTests.swift */; };
+		C5CA955F24212CB0000A4F9A /* AlbumViewMockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CA955E24212CB0000A4F9A /* AlbumViewMockService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		C5CA95572421181F000A4F9A /* AlbumDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailViewModelTests.swift; sourceTree = "<group>"; };
 		C5CA955A2421207C000A4F9A /* AlbumViewModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModelBuilder.swift; sourceTree = "<group>"; };
 		C5CA955C242121B9000A4F9A /* AlbumDetailInfoViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailInfoViewModelTests.swift; sourceTree = "<group>"; };
+		C5CA955E24212CB0000A4F9A /* AlbumViewMockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewMockService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			children = (
 				C5C2919B24200A51003F8790 /* AppStoreApplicationTests.swift */,
 				C5CA955324211366000A4F9A /* AlbumViewModelTests.swift */,
+				C5CA955E24212CB0000A4F9A /* AlbumViewMockService.swift */,
 				C5CA955524211680000A4F9A /* AlbumCellViewModelTests.swift */,
 				C5CA95572421181F000A4F9A /* AlbumDetailViewModelTests.swift */,
 				C5CA955C242121B9000A4F9A /* AlbumDetailInfoViewModelTests.swift */,
@@ -335,6 +338,7 @@
 				C5CA955D242121B9000A4F9A /* AlbumDetailInfoViewModelTests.swift in Sources */,
 				C5CA95582421181F000A4F9A /* AlbumDetailViewModelTests.swift in Sources */,
 				C5CA955B2421207C000A4F9A /* AlbumViewModelBuilder.swift in Sources */,
+				C5CA955F24212CB0000A4F9A /* AlbumViewMockService.swift in Sources */,
 				C5CA955624211680000A4F9A /* AlbumCellViewModelTests.swift in Sources */,
 				C5C2919C24200A51003F8790 /* AppStoreApplicationTests.swift in Sources */,
 			);

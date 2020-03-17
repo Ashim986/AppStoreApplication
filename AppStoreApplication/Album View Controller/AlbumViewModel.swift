@@ -34,8 +34,8 @@ class AlbumViewModel {
                 return
             }
             self?.albums = data
-            self?.delegate?.showSuccess()
             self?.isLoading = false
+            self?.delegate?.showSuccess()
         })
     }
     
@@ -46,7 +46,7 @@ class AlbumViewModel {
         return album
     }
     
-    func getAlbumViewModel(at indexPath: IndexPath) -> AlbumCellViewModel? {
+    func getAlbumCellViewModel(at indexPath: IndexPath) -> AlbumCellViewModel? {
         let album = getAlbum(at: indexPath)
         let albumName = album?.albumName
         let artistName = album?.artistName

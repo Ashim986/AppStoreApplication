@@ -50,10 +50,17 @@ extension AlbumDetailInfoViewController: Bindable {
 
 extension AlbumDetailInfoViewController: AlbumDetailViewDelegate, SFSafariViewControllerDelegate {
     func didTappedButtonForItunesStore() {
-        guard let urlString = viewModel?.urlString, let url = URL(string: urlString) else { return }
-        let config = SFSafariViewController.Configuration()
-        let safariVC: SFSafariViewController = SFSafariViewController(url: url, configuration: config)
-        safariVC.delegate = self
-        self.present(safariVC, animated: false)
+        if let urlString = viewModel?.urlString?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            guard let url = makeValidURL(urlString: urlString) else { return }
+            let config = SFSafariViewController.Configuration()
+            let safariVC: SFSafariViewController = SFSafariViewController(url: url, configuration: config)
+            safariVC.delegate = self
+            self.present(safariVC, animated: false)
+        }
     }
+}
+
+private func makeValidURL(urlString: String = "") -> URL? {
+    guard let url = URL(string: urlString), NSURLConnection.canHandle(URLRequest(url: url)) else { return nil }
+    return url
 }
