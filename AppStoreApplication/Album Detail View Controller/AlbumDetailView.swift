@@ -107,7 +107,7 @@ class AlbumDetailView: UIView {
             albumImageView.safeAreaLayoutGuide.topAnchor.constraint(equalTo: topAnchor),
             albumImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             albumImageView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            albumImageView.heightAnchor.constraint(equalToConstant: 400)
+            albumImageView.heightAnchor.constraint(equalToConstant: 300)
         ])
         NSLayoutConstraint.activate([
             albumLabel.topAnchor.constraint(equalTo: albumImageView.bottomAnchor, constant: 16),
