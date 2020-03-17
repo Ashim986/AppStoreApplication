@@ -13,6 +13,13 @@ import SafariServices
 class AlbumDetailInfoViewController: UIViewController {
     
     var viewModel: AlbumDetailInfoViewModel?
+    
+    lazy var scrollView: UIScrollView = {
+       let scrollView = UIScrollView()
+        scrollView.isScrollEnabled = true
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
     var albumDetailView: AlbumDetailView = {
         let albumDetailView = AlbumDetailView()
         albumDetailView.translatesAutoresizingMaskIntoConstraints = false
@@ -38,12 +45,20 @@ extension AlbumDetailInfoViewController: Bindable {
     }
     
     private func setupView() {
-        view.addSubview(albumDetailView)
+        view.addSubview(scrollView)
+        scrollView.addSubview(albumDetailView)
         NSLayoutConstraint.activate([
-            albumDetailView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
-            albumDetailView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            albumDetailView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            albumDetailView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(greaterThanOrEqualTo: view.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            albumDetailView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 8),
+            albumDetailView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -8),
+            albumDetailView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            albumDetailView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor)
         ])
     }
 }
