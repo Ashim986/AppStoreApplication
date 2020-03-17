@@ -89,8 +89,8 @@ extension AlbumViewCell: Bindable {
         artistLabel.text = viewModel.artist
         albumLabel.text = viewModel.albumName
         DispatchQueue.main.async { [weak self] in
-            if let imageData = viewModel.thumbnailImageData {
-                self?.thumbnailImage.image = UIImage(data: imageData)
+            if let imageString = viewModel.thumbnailImageString {
+            self?.thumbnailImage.loadImageUingCasheWithUrlString(urlString: imageString)
             }
         }
     }

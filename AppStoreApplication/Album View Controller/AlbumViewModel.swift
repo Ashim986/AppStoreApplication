@@ -21,7 +21,6 @@ class AlbumViewModel {
     var albumName: String?
     var artistName: String?
     var imageString: String?
-    var thumbnailImageData: Data?
     var albums: [Album]?
     
     weak var delegate: AlbumViewModelDelegate?
@@ -48,26 +47,25 @@ class AlbumViewModel {
         albumName = album.albumName
         artistName = album.artistName
         imageString = album.albumImageURLString
-        fetchThumbNailImage()
     }
     
     func getAlbumViewModel(at indexPath: IndexPath) -> AlbumCellViewModel? {
         setUpValue(at: indexPath)
-        return AlbumCellViewModel(albumName: albumName, artist: artistName, thumbnailImageData: thumbnailImageData)
+        return AlbumCellViewModel(albumName: albumName, artist: artistName, thumbnailImageString: imageString)
     }
     
 
-    func fetchThumbNailImage() {
-        
-        guard let urlString = imageString, let url = URL(string: urlString) else {
-            return
-        }
-        service?.downloadImageFrom(url: url, completion: { [weak self](data, _, error) in
-            guard let data = data, error == nil else {
-                self?.delegate?.showError(with: "Error", message: error?.localizedDescription)
-                return
-            }
-            self?.thumbnailImageData = data
-        })
-    }
+//    func fetchThumbNailImage() {
+//
+//        guard let urlString = imageString, let url = URL(string: urlString) else {
+//            return
+//        }
+//        service?.downloadImageFrom(url: url, completion: { [weak self](data, _, error) in
+//            guard let data = data, error == nil else {
+//                self?.delegate?.showError(with: "Error", message: error?.localizedDescription)
+//                return
+//            }
+//            self?.thumbnailImageData = data
+//        })
+//    }
 }

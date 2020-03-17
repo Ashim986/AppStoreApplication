@@ -17,7 +17,7 @@ protocol WebService {
 
 class AppStoreService: WebService {
     func downloadAlbumData(completion: WebService.AlbumDataCompletion?) {
-        let baseURLString = "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/10/explicit.jsonaaa"
+        let baseURLString = "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/10/explicit.json"
         if let baseURL = URL(string: baseURLString) {
             URLSession.shared.dataTask(with: baseURL) { (data, _, error) in
                 guard let data = data, error == nil else {

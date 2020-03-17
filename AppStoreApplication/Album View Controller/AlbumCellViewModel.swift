@@ -11,12 +11,12 @@ import Foundation
 class AlbumCellViewModel {
     let albumName: String?
     let artist: String?
-    let thumbnailImageData: Data?
+    let thumbnailImageString: String?
     
-    init(albumName: String?, artist: String?, thumbnailImageData: Data?) {
+    init(albumName: String?, artist: String?, thumbnailImageString: String?) {
         self.albumName = albumName
         self.artist = artist
-        self.thumbnailImageData = thumbnailImageData
+        self.thumbnailImageString = thumbnailImageString
     }
 }
 
