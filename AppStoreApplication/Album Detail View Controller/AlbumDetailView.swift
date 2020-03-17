@@ -56,7 +56,7 @@ class AlbumDetailView: UIView {
         return label
     }()
     
-    var copyWrite: UILabel = {
+    var copywrite: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.lineBreakMode = .byWordWrapping
@@ -67,9 +67,14 @@ class AlbumDetailView: UIView {
     
     let submitButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = .green
+        button.backgroundColor = .lightGray
+        button.setTitle("ItunesStore", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
+        button.layer.cornerRadius = 5
+        button.layer.masksToBounds = true
         return button
     }()
     
@@ -88,7 +93,7 @@ class AlbumDetailView: UIView {
         addSubview(artistLabel)
         addSubview(releaseDate)
         addSubview(genere)
-        addSubview(copyWrite)
+        addSubview(copywrite)
         addSubview(submitButton)
         setupConstraint()
     }
@@ -96,51 +101,55 @@ class AlbumDetailView: UIView {
     private func setupConstraint() {
         NSLayoutConstraint.activate([
             albumImageView.safeAreaLayoutGuide.topAnchor.constraint(equalTo: topAnchor),
-            albumImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            albumImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            albumImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            albumImageView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             albumImageView.heightAnchor.constraint(equalToConstant: 400)
         ])
         NSLayoutConstraint.activate([
-            albumLabel.safeAreaLayoutGuide.topAnchor.constraint(equalTo: albumImageView.bottomAnchor, constant: 16),
-            albumLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            albumLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            albumLabel.topAnchor.constraint(equalTo: albumImageView.bottomAnchor, constant: 16),
+            albumLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            albumLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
             albumLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 32)
         ])
         
         NSLayoutConstraint.activate([
-            artistLabel.safeAreaLayoutGuide.topAnchor.constraint(equalTo: albumLabel.bottomAnchor, constant: 4),
-            artistLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            artistLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            artistLabel.topAnchor.constraint(equalTo: albumLabel.bottomAnchor, constant: 4),
+            artistLabel.leadingAnchor.constraint(equalTo: albumLabel.leadingAnchor),
+            artistLabel.trailingAnchor.constraint(equalTo: albumLabel.trailingAnchor),
             artistLabel.heightAnchor.constraint(equalToConstant: 24)
         ])
         
         NSLayoutConstraint.activate([
-            releaseDate.safeAreaLayoutGuide.topAnchor.constraint(equalTo: artistLabel.bottomAnchor, constant: 4),
-            releaseDate.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            releaseDate.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            releaseDate.topAnchor.constraint(equalTo: artistLabel.bottomAnchor, constant: 4),
+            releaseDate.leadingAnchor.constraint(equalTo: albumLabel.leadingAnchor),
+            releaseDate.trailingAnchor.constraint(equalTo: albumLabel.trailingAnchor),
             releaseDate.heightAnchor.constraint(equalToConstant: 32)
         ])
         
         NSLayoutConstraint.activate([
-            genere.safeAreaLayoutGuide.topAnchor.constraint(equalTo: releaseDate.bottomAnchor, constant: 4),
-            genere.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            genere.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            genere.topAnchor.constraint(equalTo: releaseDate.bottomAnchor, constant: 4),
+            genere.leadingAnchor.constraint(equalTo: albumLabel.leadingAnchor),
+            genere.trailingAnchor.constraint(equalTo: albumLabel.trailingAnchor),
             genere.heightAnchor.constraint(equalToConstant: 24)
         ])
         
         NSLayoutConstraint.activate([
-            copyWrite.topAnchor.constraint(equalTo: genere.bottomAnchor, constant: 4),
-            copyWrite.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            copyWrite.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            copyWrite.heightAnchor.constraint(equalToConstant: 24)
+            copywrite.topAnchor.constraint(equalTo: genere.bottomAnchor, constant: 4),
+            copywrite.leadingAnchor.constraint(equalTo: albumLabel.leadingAnchor),
+            copywrite.trailingAnchor.constraint(equalTo: albumLabel.trailingAnchor),
+            copywrite.heightAnchor.constraint(equalToConstant: 24)
         ])
         
         NSLayoutConstraint.activate([
             submitButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             submitButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            submitButton.heightAnchor.constraint(equalToConstant: 48),
-            submitButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
+            submitButton.topAnchor.constraint(equalTo: copywrite.bottomAnchor, constant: 30),
+            submitButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
         ])
+        
+        let submitButtonTopAnchor = submitButton.heightAnchor.constraint(equalToConstant: 48)
+        submitButtonTopAnchor.isActive = true
+        submitButtonTopAnchor.priority = UILayoutPriority(500)
     }
     
     required init?(coder: NSCoder) {
@@ -164,7 +173,7 @@ extension AlbumDetailView: Bindable {
         artistLabel.text = "Artist: \(viewModel.artistName ?? "")"
         releaseDate.text = "Release Date: \(viewModel.releaseDate ?? "")"
         genere.text = viewModel.getGenreStringValue()
-        copyWrite.text = viewModel.copywrite
+        copywrite.text = viewModel.copywrite
     }
 }
 
