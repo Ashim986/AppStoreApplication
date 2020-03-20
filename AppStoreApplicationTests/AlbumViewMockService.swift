@@ -38,8 +38,4 @@ extension AlbumViewMockService: AlbumViewModelDelegate{
         }
         expectation.fulfill()
     }
-    
-    
-    
-    
 }

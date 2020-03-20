@@ -10,14 +10,14 @@ import Foundation
 @testable import AppStoreApplication
 
 class AlbumDetailViewModelBuilder {
-    var album: [Album]?
+    var albums: [Album]?
     func setAlbumFromJsonData() -> AlbumDetailViewModelBuilder {
         if let path = Bundle.main.path(forResource: "AlbumJsonData", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 let decoder = JSONDecoder()
-                let jsonData = try? decoder.decode(Response.self, from: data)
-                album = jsonData?.feed?.results
+                let jsonData = try? decoder.decode(Response<AlbumServiceData>.self, from: data)
+                albums = jsonData?.feed?.results
             } catch {
                 
             }
@@ -26,6 +26,6 @@ class AlbumDetailViewModelBuilder {
     }
     
     func build() -> [Album]? {
-        return album
+        return albums
     }
 }

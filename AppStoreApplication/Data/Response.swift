@@ -8,25 +8,41 @@
 
 import Foundation
 
-struct Response: Decodable {
-    let feed: Result?
+struct Response <T: Decodable>: Decodable {
+    let feed: Feed<T>?
+    //let errors: [ResponseErrors]
     
     init(from decoder: Decoder) throws {
         let map = try decoder.container(keyedBy: CodingKeys.self)
-        feed = try? map.decode(Result.self, forKey: .feed)
+        feed = try? map.decode(Feed.self, forKey: .feed)
+        //errors = try map.decode([ResponseErrors].self, forKey: .errors)
     }
        
     enum CodingKeys: String, CodingKey {
         case feed = "feed"
+        case errors = "Errors"
     }
 }
 
-struct Result: Decodable {
-    var results: [Album]?
+struct ResponseErrors: Decodable, Error {
+    
+    let errorCode: String
+    let text: String
+    let description: String
+    
+    enum CodingKeys: String, CodingKey {
+        case errorCode = "ErrorCode"
+        case text = "Text"
+        case description = "Description"
+    }
+}
+
+struct Feed<T: Decodable>: Decodable {
+    var results: [T]?
     
     init(from decoder: Decoder) throws {
         let map = try decoder.container(keyedBy: CodingKeys.self)
-        results = try? map.decode([AlbumServiceData].self, forKey: .results)
+        results = try? map.decode([T].self, forKey: .results)
     }
        
     enum CodingKeys: String, CodingKey {

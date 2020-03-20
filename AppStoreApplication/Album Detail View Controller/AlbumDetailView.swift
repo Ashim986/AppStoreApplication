@@ -11,6 +11,12 @@ protocol AlbumDetailViewDelegate: class {
     func didTappedButtonForItunesStore()
 }
 
+extension AlbumDetailViewDelegate {
+    func didTappedButtonForItunesStore() {
+        
+    }
+}
+
 class AlbumDetailView: UIView {
     
     var viewModel: AlbumDetailViewModel?
