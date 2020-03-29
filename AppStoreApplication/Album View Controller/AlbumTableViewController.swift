@@ -18,7 +18,7 @@ class AlbumTableViewController: UITableViewController {
         registerTableViewCell()
         viewModel.fetchAlbumData()
     }
-    
+
     private func registerTableViewCell() {
         tableView.register(AlbumViewCell.self, forCellReuseIdentifier: AlbumViewCell.identifier)
     }
@@ -40,13 +40,15 @@ class AlbumTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if viewModel.isLoading && viewModel.albums == nil {
-            return 40.0
-        } else if !viewModel.isLoading && viewModel.albums?.count ?? 0 > 1 {
-            return 80.0
+        if !viewModel.isLoading && viewModel.albums == nil {
+            return 0
         } else {
-            return 0.0
+           return  UITableView.automaticDimension
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 20
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

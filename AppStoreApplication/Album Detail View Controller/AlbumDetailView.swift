@@ -11,12 +11,6 @@ protocol AlbumDetailViewDelegate: class {
     func didTappedButtonForItunesStore()
 }
 
-extension AlbumDetailViewDelegate {
-    func didTappedButtonForItunesStore() {
-        
-    }
-}
-
 class AlbumDetailView: UIView {
     
     var viewModel: AlbumDetailViewModel?
@@ -115,6 +109,7 @@ class AlbumDetailView: UIView {
             albumImageView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
             albumImageView.heightAnchor.constraint(equalToConstant: 300)
         ])
+
         NSLayoutConstraint.activate([
             albumLabel.topAnchor.constraint(equalTo: albumImageView.bottomAnchor, constant: 16),
             albumLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),

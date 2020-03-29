@@ -18,6 +18,13 @@ class AlbumCellViewModel {
         self.artist = artist
         self.thumbnailImageString = thumbnailImageString
     }
+    
+    func isDataAvailable() -> Bool {
+        guard let albumName = albumName, !albumName.isEmpty, let artist = artist, !artist.isEmpty,  let imageString = thumbnailImageString, !imageString.isEmpty else {
+            return false
+        }
+        return true
+    }
 }
 
 

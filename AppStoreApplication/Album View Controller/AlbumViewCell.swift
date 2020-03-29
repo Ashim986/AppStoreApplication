@@ -9,11 +9,11 @@
 import UIKit
 
 class AlbumViewCell: UITableViewCell {
-
+    
     var viewModel: AlbumCellViewModel?
     
     var albumLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.textAlignment = .left
@@ -22,7 +22,7 @@ class AlbumViewCell: UITableViewCell {
     }()
     
     var artistLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -32,6 +32,9 @@ class AlbumViewCell: UITableViewCell {
     
     var thumbnailImage: UIImageView = {
         let imageView = UIImageView()
+        imageView.layer.cornerRadius = 20
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -40,6 +43,9 @@ class AlbumViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        let cellHeightAnchor = heightAnchor.constraint(equalToConstant: 80)
+        cellHeightAnchor.isActive = true
+        cellHeightAnchor.priority = UILayoutPriority(rawValue: 750)
         setupView()
     }
     
@@ -52,7 +58,13 @@ class AlbumViewCell: UITableViewCell {
         addSubview(artistLabel)
         addSubview(thumbnailImage)
         setupAnchor()
+        setupViewState(isHidden: true)
     }
+    
+    private func setupViewState(isHidden: Bool) {
+        [albumLabel, artistLabel, thumbnailImage].forEach { $0.isHidden = isHidden }
+    }
+    
     
     private func setupAnchor() {
         NSLayoutConstraint.activate([
@@ -60,25 +72,25 @@ class AlbumViewCell: UITableViewCell {
             thumbnailImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             thumbnailImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
             thumbnailImage.widthAnchor.constraint(equalToConstant: 48)
-            ])
+        ])
         NSLayoutConstraint.activate([
             albumLabel.topAnchor.constraint(equalTo: thumbnailImage.topAnchor, constant: 8),
             albumLabel.leadingAnchor.constraint(equalTo: thumbnailImage.trailingAnchor, constant: 16),
             albumLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             albumLabel.heightAnchor.constraint(equalToConstant: 24)
-            ])
+        ])
         NSLayoutConstraint.activate([
             artistLabel.leadingAnchor.constraint(equalTo: thumbnailImage.trailingAnchor, constant: 16),
             artistLabel.trailingAnchor.constraint(equalTo: albumLabel.trailingAnchor),
             artistLabel.heightAnchor.constraint(equalToConstant: 24),
             artistLabel.bottomAnchor.constraint(equalTo: thumbnailImage.bottomAnchor, constant: -8)
-            ])
+        ])
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
+    
 }
 
 extension AlbumViewCell: Bindable {
@@ -86,11 +98,18 @@ extension AlbumViewCell: Bindable {
         guard let viewModel = viewModel else {
             fatalError("failed to find view model")
         }
-        artistLabel.text = viewModel.artist
-        albumLabel.text = viewModel.albumName
-        DispatchQueue.main.async { [weak self] in
-            if let imageString = viewModel.thumbnailImageString {
-            self?.thumbnailImage.loadImageUingCasheWithUrlString(urlString: imageString)
+        setViewState(viewModel)
+    }
+    
+    private func setViewState(_ viewModel: AlbumCellViewModel) {
+        if viewModel.isDataAvailable() {
+            setupViewState(isHidden: false)
+            artistLabel.text = viewModel.artist
+            albumLabel.text = viewModel.albumName
+            DispatchQueue.main.async { [weak self] in
+                if let imageString = viewModel.thumbnailImageString {
+                    self?.thumbnailImage.loadImageUingCasheWithUrlString(urlString: imageString)
+                }
             }
         }
     }
