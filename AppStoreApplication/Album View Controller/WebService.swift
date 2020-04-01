@@ -16,6 +16,7 @@ protocol WebService {
 class AppStoreService: WebService {
     func downloadAlbumData(completion: WebService.AlbumDataCompletion?) {
         let baseURLString = "https://rss.itunes.apple.com/api/v1/us/apple-music/top-albums/all/100/explicit.json"
+        
         guard let request = URLRequest.getURLRequest(for: baseURLString) else {
             return
         }

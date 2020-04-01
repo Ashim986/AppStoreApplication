@@ -14,12 +14,6 @@ protocol Genre {
 
 struct GenreServiceData: Genre, Decodable {
     var name: String?
-    
-    init(from decoder: Decoder) throws {
-        let map = try decoder.container(keyedBy: CodingKeys.self)
-        name = try? map.decode(String.self, forKey: .name)
-    }
-    
     enum CodingKeys: String, CodingKey {
         case name = "name"
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C54A76E22435120500D7EB28 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C54A76E12435120500D7EB28 /* Bundle+Extension.swift */; };
 		C5C2918724200A50003F8790 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C2918624200A50003F8790 /* AppDelegate.swift */; };
 		C5C2918C24200A50003F8790 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5C2918A24200A50003F8790 /* Main.storyboard */; };
 		C5C2918E24200A51003F8790 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5C2918D24200A51003F8790 /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C54A76E12435120500D7EB28 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		C5C2918324200A50003F8790 /* AppStoreApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStoreApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5C2918624200A50003F8790 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5C2918B24200A50003F8790 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				C5CA95572421181F000A4F9A /* AlbumDetailViewModelTests.swift */,
 				C5CA955C242121B9000A4F9A /* AlbumDetailInfoViewModelTests.swift */,
 				C5CA955A2421207C000A4F9A /* AlbumViewModelBuilder.swift */,
+				C54A76E12435120500D7EB28 /* Bundle+Extension.swift */,
 				C5C2919D24200A51003F8790 /* Info.plist */,
 				C5CA953B24203F32000A4F9A /* AlbumJsonData.json */,
 			);
@@ -345,6 +348,7 @@
 				C5CA955424211366000A4F9A /* AlbumViewModelTests.swift in Sources */,
 				C5CA955D242121B9000A4F9A /* AlbumDetailInfoViewModelTests.swift in Sources */,
 				C5CA95582421181F000A4F9A /* AlbumDetailViewModelTests.swift in Sources */,
+				C54A76E22435120500D7EB28 /* Bundle+Extension.swift in Sources */,
 				C5CA955B2421207C000A4F9A /* AlbumViewModelBuilder.swift in Sources */,
 				C5CA955F24212CB0000A4F9A /* AlbumViewMockService.swift in Sources */,
 				C5CA955624211680000A4F9A /* AlbumCellViewModelTests.swift in Sources */,

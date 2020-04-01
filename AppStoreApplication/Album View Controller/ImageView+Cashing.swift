@@ -13,7 +13,7 @@ let imageCashe = NSCache<NSString, UIImage>()
 extension UIImageView {
     
     func loadImageUingCasheWithUrlString(urlString : String){
-       // check for cache Image first
+        // check for cache Image first
         self.image = nil
         if let cashedImage = imageCashe.object(forKey: urlString as NSString){
             self.image = cashedImage
@@ -29,11 +29,12 @@ extension UIImageView {
                     print(error?.localizedDescription as Any)
                     return
                 }
-                DispatchQueue.main.async {
+                
+                DispatchQueue.main.async { [weak self] in
                     if let downloadedImage = UIImage(data : data) {
                         imageCashe.setObject(downloadedImage, forKey: (urlString as NSString))
-                }
-               self.image = UIImage(data: data)
+                    }
+                    self?.image = UIImage(data: data)
                 }
             }).resume()
         }

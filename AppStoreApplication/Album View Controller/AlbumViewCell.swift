@@ -17,7 +17,7 @@ class AlbumViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 24, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 30, weight: .regular)
         return label
     }()
     
@@ -26,7 +26,7 @@ class AlbumViewCell: UITableViewCell {
         label.numberOfLines = 0
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         return label
     }()
     

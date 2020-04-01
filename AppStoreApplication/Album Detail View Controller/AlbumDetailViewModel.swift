@@ -21,7 +21,7 @@ class AlbumDetailViewModel {
         albumName = album?.albumName
         artistName = album?.artistName
         releaseDate = album?.releaseDate
-        genres = album?.generes
+        genres = album?.genres
         copywrite = album?.copyright
     }
     
