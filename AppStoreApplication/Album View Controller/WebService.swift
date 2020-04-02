@@ -9,7 +9,7 @@
 import Foundation
 
 protocol WebService {
-    typealias AlbumDataCompletion = ([Album]?, Error?) -> Void
+    typealias AlbumDataCompletion = (Result<[AlbumServiceData]?, Error>) -> Void
     func downloadAlbumData(completion: AlbumDataCompletion?)
 }
 

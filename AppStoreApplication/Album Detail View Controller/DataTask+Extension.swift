@@ -10,19 +10,22 @@ import Foundation
 
 extension URLSession {
     
-    func dataTaskWith<T: Decodable>(forType dataType: T.Type, request: URLRequest, completion: (([T]?, Error?) -> Void)?) -> URLSessionDataTask {
+    func dataTaskWith<T: Decodable>(forType dataType: T.Type, request: URLRequest, completion: ((Result<[T]?, Error>) -> Void)?) -> URLSessionDataTask {
         
         return dataTask(with: request) { (data, _, error) in
-            guard let data = data, error == nil else {
-                completion?(nil, error)
+            guard let data = data else {
+                if let error = error {
+                    completion?(.failure(error))
+                }
                 return
             }
             let decoder = JSONDecoder()
             do {
                let jsonData = try decoder.decode(Response<T>.self, from: data)
-                completion?(jsonData.feed?.results, nil)
+                completion?(.success(jsonData.feed?.results))
+                
             } catch let jsonError{
-                completion?(nil, jsonError)
+                completion?(.failure(jsonError))
             }
         }
     }

@@ -27,15 +27,16 @@ class AlbumViewModel {
     }
     
     func fetchAlbumData() {
-        service?.downloadAlbumData(completion: { [weak self](data, error) in
-            guard let data = data, error == nil else {
-                self?.delegate?.showError(with: "Error", message: error?.localizedDescription)
+        service?.downloadAlbumData(completion: { [weak self] (result) in
+            switch result {
+            case .success(let data):
+                self?.albums = data
                 self?.isLoading = false
-                return
+                self?.delegate?.showSuccess()
+            case .failure(let error):
+                self?.delegate?.showError(with: "Error", message: error.localizedDescription)
+                self?.isLoading = false
             }
-            self?.albums = data
-            self?.isLoading = false
-            self?.delegate?.showSuccess()
         })
     }
     
