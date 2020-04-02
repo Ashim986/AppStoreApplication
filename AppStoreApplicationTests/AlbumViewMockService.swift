@@ -10,14 +10,14 @@ import XCTest
 @testable import AppStoreApplication
 
 class AlbumViewMockService: MockWebService {
-    var errorState: String?
     var asyncExpectation: XCTestExpectation?
     
     override func downloadAlbumData(completion: MockWebService.AlbumDataCompletion?) {
-        let albums = AlbumDetailViewModelBuilder()
+        if let result = AlbumDetailViewModelBuilder()
             .setAlbumFromJsonData()
-            .build()
-        completion?(albums, nil)
+            .build() {
+            completion?(result)
+        }
     }
 }
 
@@ -27,7 +27,6 @@ extension AlbumViewMockService: AlbumViewModelDelegate{
             XCTFail("Missing XCTExpectation reference")
             return
         }
-        self.errorState = title
         expectation.fulfill()
     }
     

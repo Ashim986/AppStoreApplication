@@ -17,9 +17,20 @@ class AlbumDetailInfoViewModelTests: XCTestCase {
     }
     
     func testInitilizeData() {
-        let album = AlbumDetailViewModelBuilder()
+        var album: Album?
+        let result = AlbumDetailViewModelBuilder()
             .setAlbumFromJsonData()
-            .build()?.first
+            .build()
+        
+        switch result {
+        case .success(let data):
+            album = data?.first
+        case .failure:
+            album = nil
+        case .none:
+            album = nil
+        }
+        
         let viewModel = AlbumDetailInfoViewModel(album: album)
         XCTAssertEqual(viewModel.album?.albumName, album?.albumName)
     }

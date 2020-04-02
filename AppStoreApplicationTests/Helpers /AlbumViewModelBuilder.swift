@@ -10,14 +10,18 @@ import Foundation
 @testable import AppStoreApplication
 
 class AlbumDetailViewModelBuilder {
-    var albums: [Album]?
+    
+    var result: Result<[AlbumServiceData]?, Error>?
     func setAlbumFromJsonData() -> AlbumDetailViewModelBuilder {
         let response = Bundle.main.decode(for: Response<AlbumServiceData>.self, file: "AlbumJsonData")
-        self.albums = response?.feed?.results
+        let result = response.map { (response) -> [AlbumServiceData]?in
+            return response?.feed?.results
+        }
+        self.result = result
         return self
     }
     
-    func build() -> [Album]? {
-        return albums
+    func build() -> Result<[AlbumServiceData]?, Error>? {
+        return result
     }
 }
