@@ -24,7 +24,7 @@ class AlbumTableViewController: UITableViewController {
     }
     
     private func setupNavigationItem() {
-        title = "Album change rebase name"
+        title = "Album"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
